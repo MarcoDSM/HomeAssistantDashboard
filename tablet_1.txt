@@ -1,0 +1,291 @@
+kiosk_mode:
+  non_admin_settings:
+    hide_header: true
+    hide_menubutton: true
+    hide_notifications: true
+    hide_account: true
+    hide_dialog_history_show_more: true
+    hide_dialog_logbook_show_more: true
+    hide_dialog_attributes: true
+    hide_dialog_update_actions: true
+    hide_dialog_timer_actions: true
+views:
+  - title: Keuken tablet
+    type: sections
+    max_columns: 3
+    cards: []
+    dense_section_placement: true
+    path: home-new
+    sections:
+      - type: grid
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.google_travel_time
+            name: Name2 Commute
+            icon: mdi:car-hatchback
+            font_size: 200
+            font_weight: 500
+            animate: true
+            height: 136
+            line_width: 2
+            hour24: true
+            hours_to_show: 2
+            points_per_hour: 20
+            smoothing: false
+            lower_bound: 32
+            show:
+              graph: bar
+              icon: true
+              state: true
+            color_thresholds:
+              - value: 0
+                color: yellowgreen
+              - value: 37
+                color: gold
+              - value: 41
+                color: darkorange
+              - value: 47
+                color: orangered
+              - value: 53
+                color: firebrick
+            card_mod:
+              style: |
+                ha-card {
+                  --mdc-icon-size: 50px;
+                  color: yellowgreen;
+                  --card-mod-icon-color: yellowgreen;
+                  {% if states('sensor.google_travel_time') | float > 37 %} color: yellowgreen; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 41 %} color: darkorange; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 47 %} color: orangered; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 53 %} color: firebrick; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 37 %} --card-mod-icon-color: yellowgreen; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 41 %} --card-mod-icon-color: darkorange; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 47 %} --card-mod-icon-color: orangered; {% endif %}
+                  {% if states('sensor.google_travel_time') | float > 53 %} --card-mod-icon-color: firebrick; {% endif %}
+                }
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-traffic
+      - type: grid
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.google_travel_time_2
+            name: Name commute
+            icon: mdi:car-sports
+            font_size: 200
+            font_weight: 500
+            animate: true
+            height: 136
+            line_width: 2
+            hour24: true
+            hours_to_show: 2
+            points_per_hour: 20
+            smoothing: false
+            lower_bound: 40
+            show:
+              graph: bar
+              icon: true
+              state: true
+            color_thresholds:
+              - value: 0
+                color: yellowgreen
+              - value: 45
+                color: gold
+              - value: 49
+                color: darkorange
+              - value: 53
+                color: orangered
+              - value: 59
+                color: firebrick
+            card_mod:
+              style: |
+                ha-card {
+                  --mdc-icon-size: 50px;
+                  color: yellowgreen;
+                  --card-mod-icon-color: yellowgreen;
+                  {% if states('sensor.google_travel_time_2') | float > 45 %} color: yellowgreen; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 49 %} color: darkorange; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 53 %} color: orangered; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 59 %} color: firebrick; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 45 %} --card-mod-icon-color: yellowgreen; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 49 %} --card-mod-icon-color: darkorange; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 53 %} --card-mod-icon-color: orangered; {% endif %}
+                  {% if states('sensor.google_travel_time_2') | float > 59 %} --card-mod-icon-color: firebrick; {% endif %}
+                }
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-traffic
+      - type: grid
+        cards:
+          - type: custom:weather-radar-card
+            data_source: RainViewer-Original
+            zoom_level: 6
+            show_zoom: false
+            show_recenter: false
+            show_marker: true
+            show_scale: true
+            show_range: true
+            show_playback: false
+            extra_labels: false
+            square_map: false
+            marker_longitude: 5.0
+            marker_latitude: 40
+            static_map: false
+            center_latitude: 40
+            card_mod:
+              style: |
+                ha-card {
+                  color: rgb(0, 153, 188);
+                  height: 300px!important;
+                }
+      - type: grid
+        cards:
+          - type: custom:atomic-calendar-revive
+            name: null
+            enableModeChange: true
+            entities:
+              - entity: calendar.gezin
+              - entity: calendar.verjaardagen
+            maxDaysToShow: 20
+            untilText: Tot
+            noEventsForNextDaysText: Geen activiteiten in komende dagen
+            noEventText: Geen activiteiten
+            hiddenEventText: Activiteiten zijn verborgen
+            showProgressBar: false
+            showCurrentEventLine: false
+            showMonth: false
+            showDeclined: false
+            hideFinishedEvents: false
+            showRelativeTime: false
+            showEventIcon: false
+            hoursOnSameLine: true
+            showDate: false
+            showDatePerEvent: false
+            showEventDate: true
+            grid:area: left
+            grid_options:
+              columns: 24
+              rows: 2
+            showLastCalendarWeek: false
+            calShowDescription: false
+            card_mod:
+              style: |
+                ha-card {
+                  color: rgb(0, 153, 188);
+                }
+        column_span: 2
+      - type: grid
+        cards:
+          - show_current: true
+            show_forecast: false
+            type: weather-forecast
+            entity: weather.forecast_home
+            forecast_type: daily
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-weer
+            forecast_slots: 1
+            grid_options:
+              columns: 12
+              rows: 2
+      - type: grid
+        cards:
+          - type: tile
+            color: amber
+            vertical: false
+            entity: sensor.sensor_bij_de_haard_temperature
+            name: Eetkamer
+            features_position: bottom
+          - type: tile
+            color: primary
+            vertical: false
+            entity: sensor.sensor_in_de_keuken_temperature
+            name: Keuken
+            features_position: bottom
+          - type: tile
+            color: amber
+            vertical: false
+            entity: sensor.hue_outdoor_motion_sensor_1_temperatuur
+            name: Terras
+            features_position: bottom
+          - type: tile
+            color: primary
+            vertical: false
+            entity: sensor.hue_outdoor_motion_sensor_2_temperatuur
+            name: Garage
+            features_position: bottom
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.sensor_in_de_keuken_temperature
+              - sensor.sensor_bij_de_haard_temperature
+            stat_types:
+              - mean
+              - max
+              - min
+            hide_legend: true
+            days_to_show: 1
+            card_mod:
+              style: |
+                ha-card {
+                  --graph-color-1: #ff9800;
+                  --graph-color-1: #0099bc;
+                }
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.hue_outdoor_motion_sensor_2_temperatuur
+              - sensor.hue_outdoor_motion_sensor_1_temperatuur
+            stat_types:
+              - mean
+              - max
+              - min
+            hide_legend: true
+            days_to_show: 1
+            card_mod:
+              style: |
+                ha-card {
+                  --graph-color-1: #ff9800;
+                  --graph-color-1: #0099bc;
+                }
+        column_span: 2
+      - type: grid
+        cards:
+          - type: tile
+            features_position: bottom
+            vertical: false
+            entity: light.licht_groep_keuken
+            name: Keuken
+            show_entity_picture: false
+            hide_state: false
+          - type: tile
+            entity: light.eetkamer
+            features_position: bottom
+            vertical: false
+          - type: custom:mushroom-light-card
+            entity: light.licht_groep_keuken
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: true
+            fill_container: true
+            name: Keuken
+            grid_options:
+              columns: 12
+              rows: 2
+          - type: custom:mushroom-light-card
+            entity: light.licht_groep_eetkamer
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: true
+            fill_container: true
+            name: Eetkamer
+            grid_options:
+              columns: 12
+              rows: 2
+    icon: mdi:tablet-dashboard

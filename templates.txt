@@ -1,0 +1,24 @@
+sensor:
+  - name: "lights_on_count"
+    unique_id: <deleted>
+    icon: mdi:lightbulb
+    state: >
+      {{states.light | rejectattr('entity_id','in',label_entities('GEGROEPEERDE_LAMPEN')) | selectattr('state','eq','on')| list| count}}
+
+  - name: "lights_off_count"
+    unique_id: <deleted>
+    icon: mdi:lightbulb-off
+    state: >
+      {{states.light | rejectattr('entity_id','in',label_entities('GEGROEPEERDE_LAMPEN')) | selectattr('state','eq','off')| list| count}}
+
+  - name: "RBR50 Download GB"
+    unique_id: <deleted>
+    unit_of_measurement: "GB"
+    state: >
+      {{ (states('sensor.rbr50_gateway_data_received') | filesizeformat()) }}
+
+  - name: "RBR50 Upload GB"
+    unique_id: <deleted>
+    unit_of_measurement: "GB"
+    state: >
+      {{ (states('sensor.rbr50_gateway_data_sent') | filesizeformat()) }}

@@ -1,0 +1,482 @@
+kiosk_mode:
+  non_admin_settings:
+    hide_header: true
+    hide_menubutton: true
+    hide_notifications: true
+    hide_account: true
+    hide_dialog_history_show_more: true
+    hide_dialog_logbook_show_more: true
+    hide_dialog_attributes: true
+    hide_dialog_update_actions: true
+    hide_dialog_timer_actions: true
+views:
+  - title: Klimaat
+    badges: []
+    cards: []
+    type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Verwarming
+            icon: mdi:heat-wave
+          - type: thermostat
+            entity: climate.woonkamer
+            name: ' '
+            grid_options:
+              columns: full
+              rows: 5
+            show_current_as_primary: true
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.hvac_heating_time
+            name: Verwarming aan, laatste 7 dagen
+            icon: mdi:heating-coil
+            animate: true
+            hour24: true
+            hours_to_show: 168
+            points_per_hour: 1
+            group_by: date
+            smoothing: false
+            lower_bound: 0
+            show:
+              graph: bar
+              icon: true
+              state: true
+          - type: heading
+            heading: Luchtvochtigheid
+            heading_style: subtitle
+            icon: mdi:water-percent
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.woonkamer_luchtvochtigheid
+            stat_types:
+              - mean
+              - min
+              - max
+            min_y_axis: 0
+            hide_legend: true
+            days_to_show: 7
+            max_y_axis: 100
+            card_mod:
+              style: |
+                ha-card {
+                  --graph-color-1: #ff9800;
+                }
+            grid_options:
+              columns: 12
+              rows: 2
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: >-
+              Woonkamer‎ ‎ ‎ ‎ ‎ ‎‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ 
+              ‎ ‎ ‎ ‎ open ⇠⇢ dicht
+            icon: hue:room-living
+          - features:
+              - type: cover-position
+            type: tile
+            entity: cover.grote_woonkamer_vensters
+            features_position: inline
+            vertical: false
+            name: Vensters
+            color: accent
+          - features:
+              - type: cover-position
+            type: tile
+            entity: cover.grote_woonkamer_zonwering
+            features_position: inline
+            vertical: false
+            name: Zonwering
+            color: accent
+          - features:
+              - type: cover-position
+              - type: cover-tilt-position
+            type: tile
+            entity: cover.jaloezieen_grote_woonkamer
+            features_position: bottom
+            vertical: false
+            grid_options:
+              columns: 12
+              rows: 3
+            name: Jaloezien
+            hide_state: false
+            color: accent
+          - type: heading
+            heading_style: title
+            heading: >-
+              Speelkamer‎ ‎ ‎ ‎ ‎ ‎‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎
+              ‎  ‎ ‎ ‎  ‎ ‎  ‎open ⇠⇢ dicht
+            icon: mdi:controller
+          - features:
+              - type: cover-position
+            type: tile
+            entity: cover.speelkamer_vensters
+            features_position: inline
+            vertical: false
+            name: Vensters
+            color: accent
+          - features:
+              - type: cover-position
+            type: tile
+            entity: cover.speelkamer_rolluiken
+            features_position: inline
+            vertical: false
+            name: Rolluiken
+            color: accent
+          - type: heading
+            heading_style: title
+            heading: >-
+              Bovenverdieping‎ ‎ ‎ ‎‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎  ‎ ‎‎ ‎ ‎ 
+              open ⇠⇢ dicht
+            icon: hue:upstairs
+          - features:
+              - type: cover-position
+            type: tile
+            entity: cover.grote_slaapkamer_rolluiken
+            features_position: inline
+            vertical: false
+            name: Slaapkamer rolluiken
+            color: accent
+          - features:
+              - type: cover-position
+            type: tile
+            entity: cover.group_1
+            features_position: inline
+            vertical: false
+            grid_options:
+              columns: 12
+              rows: 1
+            name: Badkamer rolluiken
+            color: accent
+      - type: grid
+        cards:
+          - type: heading
+            heading: Beneden
+            heading_style: title
+            icon: hue:downstairs
+          - type: gauge
+            entity: sensor.sensor_in_de_keuken_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Keuken
+          - type: gauge
+            entity: sensor.sensor_bij_de_haard_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Eetkamer
+          - type: gauge
+            entity: sensor.hue_motion_sensor_4_temperatuur
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Woonkamer
+          - type: gauge
+            entity: sensor.hue_motion_sensor_1_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Hal
+          - type: gauge
+            entity: sensor.hue_motion_sensor_2_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Garderobe
+          - type: gauge
+            entity: sensor.gastentoilet_sensor_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Toilet
+          - type: gauge
+            entity: sensor.varkensstal_sensor_1_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Varkensstallen
+          - type: gauge
+            entity: sensor.hue_motion_sensor_6_temperatuur
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: CV hok
+          - type: heading
+            heading: Boven
+            heading_style: subtitle
+            icon: hue:upstairs
+          - type: gauge
+            entity: sensor.grote_slaapkamer_bewegingssensor_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Slaapkamer
+          - type: gauge
+            entity: sensor.badkamer_sensor_temperature
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Badkamer boven
+          - type: gauge
+            entity: sensor.woonkamer_temperatuur
+            needle: false
+            min: -10
+            max: 35
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Vide / kantoor
+          - type: heading
+            heading: Buiten
+            heading_style: subtitle
+            icon: hue:room-outdoors
+          - type: gauge
+            entity: sensor.hue_outdoor_motion_sensor_2_temperatuur
+            needle: false
+            segments:
+              - from: -30
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Garage
+            min: -20
+            max: 35
+          - type: gauge
+            entity: sensor.hue_outdoor_motion_sensor_1_temperatuur
+            needle: false
+            segments:
+              - from: -10
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 21
+                color: '#ffe912'
+              - from: 23
+                color: '#ffa32e'
+              - from: 25
+                color: '#ff1e02'
+              - from: 30
+                color: '#aa0000'
+            grid_options:
+              columns: 4
+              rows: 2
+            name: Terras
+            min: -20
+            max: 35
+    max_columns: 3
