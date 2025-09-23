@@ -1,0 +1,19 @@
+#I have a lot of templates, but these are the two people typically are most curious about... counting lights that are on or off ;-).
+#I count all lights, except for lights that have a label grouped lights ("GEGROEPEERDE LAMPEN"), to prevent double counting
+
+sensor:
+  - name: "lights_on_count"
+    unique_id: 82f56c1c-09e8-410e-9f5f-d74db8b3af1a-light-on
+    icon: mdi:lightbulb
+    state_class: measurement
+    unit_of_measurement: "lights"
+    state: >
+      {{states.light | rejectattr('entity_id','in',label_entities('GEGROEPEERDE_LAMPEN')) | selectattr('state','eq','on')| list| count}}
+
+  - name: "lights_off_count"
+    unique_id: 82f56c1c-09e8-410e-9f5f-d74db8b3af1b-light-off
+    icon: mdi:lightbulb-off
+    state_class: measurement
+    unit_of_measurement: "lights"
+    state: >
+      {{states.light | rejectattr('entity_id','in',label_entities('GEGROEPEERDE_LAMPEN')) | selectattr('state','eq','off')| list| count}}

@@ -1,0 +1,75 @@
+- platform: template
+  covers:
+    velux_roof_window_limited:
+      friendly_name: "Speelkamer Velux achterkant 50%"
+      device_class: window
+
+      # 0-100 slider value
+      position_template: >
+        {{ state_attr('cover.velux_window_roof_window', 'current_position') }}
+
+      # open / closed text state (HA still wants this)
+      value_template: >
+        {% set p = state_attr('cover.velux_window_roof_window', 'current_position') | int(0) %}
+        {{ 'open' if p > 0 else 'closed' }}
+
+      open_cover:
+        service: cover.set_cover_position
+        data:
+          entity_id: cover.velux_window_roof_window
+          position: 50
+
+      close_cover:
+        service: cover.close_cover
+        data:
+          entity_id: cover.velux_window_roof_window
+
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.velux_window_roof_window
+
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.velux_window_roof_window
+          position: >
+            {% set p = position | int %}
+            {{ [p, 50] | min }}
+
+    velux_roof_window_6_limited:
+      friendly_name: "Speelkamer Velux voorkant 50%"
+      device_class: window
+
+      position_template: >
+        {{ state_attr('cover.velux_window_roof_window_6', 'current_position') }}
+
+      value_template: >
+        {% set p = state_attr('cover.velux_window_roof_window_6', 'current_position') | int(0) %}
+        {{ 'open' if p > 0 else 'closed' }}
+
+      open_cover:
+        service: cover.set_cover_position
+        data:
+          entity_id: cover.velux_window_roof_window_6
+          position: 50
+
+      close_cover:
+        service: cover.close_cover
+        data:
+          entity_id: cover.velux_window_roof_window_6
+
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.velux_window_roof_window_6
+
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.velux_window_roof_window_6
+          position: >
+            {% set p = position | int %}
+            {{ [p, 50] | min }}
+            
+       

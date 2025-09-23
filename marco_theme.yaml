@@ -1,0 +1,99 @@
+# Marco theme - inspired by Windows 10 Cool Blue Bright Theme 
+Marco Theme:
+  card-mod-theme: Marco Theme
+
+  modes:
+    light:
+      primary-background-color: rgb(255, 255, 255)
+      secondary-background-color: rgb(243, 243, 243)
+      primary-text-color: rgb(0, 0, 0)
+      secondary-text-color: rgb(100, 100, 100)
+      sidebar-selected-icon-color: var(--primary-color)
+
+    dark:
+      primary-background-color: rgb(18, 18, 18)
+      secondary-background-color: rgb(30, 30, 30)
+      primary-text-color: rgb(255, 255, 255)
+      secondary-text-color: rgb(180, 180, 180)
+      sidebar-selected-icon-color: var(--light-primary-color)
+    
+  # Colors
+  primary-color: rgb(0, 153, 188)
+  light-primary-color: rgb(10, 165, 200)
+  secondary-color: rgb(255, 152, 0)
+  accent-color: var(--primary-color)
+  divider-color: rgb(102, 102, 102)
+  disabled-text-color: rgb(110, 110, 110)
+  text-primary-color: var(--primary-text-color)
+
+  # Header
+  app-header-background-color: var(--primary-color)
+  app-header-text-color: rgb(255, 255, 255)
+  paper-tabs-selection-bar-color: rgb(255, 255, 255)
+
+  # Sidebar
+  sidebar-icon-color: var(--secondary-text-color)
+  sidebar-text-color: var(--primary-text-color)
+  sidebar-background-color: var(--secondary-background-color)
+  sidebar-selected-background-color: var(--secondary-background-color)
+  sidebar-selected-text-color: var(--sidebar-selected-icon-color)
+
+  # Buttons and Icons
+  paper-item-icon-color: var(--primary-text-color)
+  paper-item-icon-active-color: var(--primary-color)
+  state-icon-color: var(--primary-text-color)
+  state-icon-active-color: var(--primary-color)
+  state-icon-unavailable-color: var(--disabled-text-color)
+
+  # Sliders
+  paper-slider-knob-color: var(--primary-color)
+  paper-slider-pin-color: var(--primary-color)
+  paper-slider-active-color: var(--primary-color)
+  paper-slider-secondary-color: var(--disabled-text-color)
+
+  # Cards
+  card-background-color: var(--secondary-background-color)
+  ha-card-border-radius: 0px
+  ha-card-border-width: 0px
+  ha-card-box-shadow: none
+  ha-card-header-color: var(--primary-color)
+  ha-card-border-color: transparent   # <— add this
+
+  # Dialogs and Dropdowns
+  paper-dialog-background-color: var(--card-background-color)
+  paper-listbox-background-color: var(--secondary-background-color)
+  paper-card-background-color: var(--card-background-color)
+  material-background-color: var(--primary-background-color)
+  material-secondary-background-color: var(--secondary-background-color)
+  mdc-theme-surface: var(--primary-background-color)
+
+  # Toggles and Switches
+  switch-checked-button-color: var(--primary-color)
+  switch-checked-track-color: var(--primary-color)
+  switch-unchecked-button-color: var(--disabled-text-color)
+  switch-unchecked-track-color: var(--disabled-text-color)
+  paper-toggle-button-checked-button-color: var(--primary-color)
+  paper-toggle-button-checked-bar-color: var(--primary-color)
+  paper-toggle-button-unchecked-button-color: var(--disabled-text-color)
+  paper-toggle-button-unchecked-bar-color: var(--disabled-text-color)
+
+  # Tables
+  table-row-background-color: var(--primary-background-color)
+  table-row-alternative-background-color: var(--secondary-background-color)
+  data-table-background-color: var(--primary-background-color)
+
+  # HACS
+  hacs-badge-color: var(--light-primary-color)
+  hacs-status-installed: rgb(73, 130, 5)
+  hacs-status-pending-restart: rgb(232, 17, 35)
+  hacs-status-pending-update: rgb(255, 185, 0)
+  hacs-status-not-loaded: var(--disabled-text-color)
+  hacs-new-color: var(--primary-color)
+
+  link-text-color: var(--primary-color)
+
+  card-mod-card: |
+    :host {
+      --graph-color-1: var(--primary-color);
+      --graph-color-2: var(--secondary-color);
+    }

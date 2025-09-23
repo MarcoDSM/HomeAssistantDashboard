@@ -1,0 +1,49 @@
+
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /config/www/community/lovelace-card-mod/card-mod.js
+    - /hacsfiles/hass-hue-icons/hass-hue-icons.js
+    
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+template: !include templates.yaml
+sensor: !include sensors.yaml
+
+
+# this script makes the HUE plugs show up and behave as lights in the dashboard :)
+light: !include lights.yaml
+
+
+# I have a mini PC with a python script that monitors these custom button presses from Home Assistant.
+# When they are pressed on the dashboard, it plays a Text-to-Speech on that mini PC
+# I use it as an internal broadcasting system (e.g. to ask the kids to come to dinner), as our house is a bit bigger
+input_button: !include input_button.yaml 
+
+
+# Powercalc helps you automatically keep track of power consumption of your devices
+powercalc:
+  create_utility_meters: true
+  utility_meter_types:
+    - weekly
+    - monthly
+  create_domain_groups:
+    - light
+
+
+# This part of the configuration ensures certain roof windows dont open more than 50% (to prevent it from raining in)
+# When they are opened "100%", they show as 100% but are still only opened 50% in reality
+homeassistant:
+  customize: !include customize.yaml
+cover: !include covers.yaml 
+
+
+# This bit allows zigbee devices to rejoin insecurely. This ensures HUE devices find their way back
+zha:
+  zigpy_config:
+    ezsp_policies:
+      TRUST_CENTER_POLICY: 0x0002  
+ 

@@ -1,0 +1,11 @@
+aan_tafel:
+  name: Aan Tafel
+  
+stop_tv:
+    name: Televisie uit
+
+stop_gamen:
+    name: Computer spelletjes uit
+
+nog_5_min:
+    name: Nog 5 minuten
