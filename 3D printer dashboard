@@ -1,0 +1,233 @@
+  - type: sections
+    max_columns: 3
+    title: 3D printer
+    path: 3d-printer
+    icon: mdi:printer-3d-nozzle
+    cards: []
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:list-status
+            heading: Overzicht
+            heading_style: title
+          - type: custom:modern-circular-gauge
+            entity: sensor.a1mini_0309da472900598_huidige_laag
+            secondary: {}
+            tertiary: {}
+            min: '0'
+            max: >-
+              {{ states('sensor.a1mini_0309da472900598_hoeveelheid_lagen') |
+              int(0) }}
+            grid_options:
+              columns: 6
+              rows: 3
+            icon: mdi:layers-triple
+            segments:
+              - color: '#0099bc'
+            name: Geprinte lagen
+          - features:
+              - type: fan-speed
+              - type: toggle
+            type: tile
+            entity: fan.a1mini_0309da472900598_koelingsventilator
+            features_position: bottom
+            vertical: false
+            color: primary
+          - features:
+              - type: toggle
+            type: tile
+            entity: switch.antela_smart_plug_3_stopcontact_1
+            features_position: bottom
+            vertical: false
+            show_entity_picture: true
+            state_content:
+              - state
+              - last_changed
+            grid_options:
+              columns: 6
+              rows: 2
+            color: primary
+          - features:
+              - type: toggle
+            type: tile
+            entity: switch.a1mini_0309da472900598_camera_inschakelen
+            features_position: bottom
+            vertical: false
+            name: Camera aan/uit
+            color: primary
+          - chart_type: line
+            period: 5minute
+            type: statistics-graph
+            entities:
+              - >-
+                sensor.sonoff_temperatuur_en_humidity_sensor_ewelink_snzb_02p_luchtvochtigheid
+            stat_types:
+              - mean
+              - min
+              - max
+            hide_legend: true
+            grid_options:
+              columns: 12
+              rows: 3
+            days_to_show: 2
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:cctv
+            heading_style: title
+            heading: Camera
+          - camera_view: auto
+            fit_mode: contain
+            type: picture-glance
+            entities: []
+            camera_image: camera.a1mini_0309da472900598_camera
+            grid_options:
+              columns: 12
+              rows: 5
+          - type: custom:modern-circular-gauge
+            entity: >-
+              sensor.sonoff_temperatuur_en_humidity_sensor_ewelink_snzb_02p_luchtvochtigheid
+            tertiary: {}
+            grid_options:
+              columns: 6
+              rows: 3
+            show_header: true
+            show_icon: true
+            secondary: {}
+            adaptive_state_color: false
+            adaptive_icon_color: true
+            name: Luchtvochtigheid
+            min: 0
+            max: 100
+            segments:
+              - from: 0
+                color: '#84c203'
+              - color: '#ff1e02'
+                from: 40
+              - color: '#aa0000'
+                from: 50
+          - type: custom:modern-circular-gauge
+            entity: >-
+              sensor.sonoff_temperatuur_en_humidity_sensor_ewelink_snzb_02p_temperatuur
+            tertiary: {}
+            grid_options:
+              columns: 6
+              rows: 3
+            show_header: true
+            show_icon: true
+            secondary: {}
+            segments:
+              - from: -50
+                color: '#0257a8'
+              - from: 0
+                color: '#03a2e5'
+              - from: 19
+                color: '#84c203'
+              - from: 22
+                color: '#ffe912'
+              - color: '#ffa32e'
+                from: 23
+              - color: '#ff1e02'
+                from: 25
+              - color: '#aa0000'
+                from: 30
+            adaptive_state_color: false
+            adaptive_icon_color: true
+            min: 15
+            max: 30
+            name: Kantoor Marco
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:globe-model
+            heading: 3D model
+            heading_style: title
+          - type: custom:ha-bambulab-print_status-card
+            printer: 2cf3bd3446707e09cab07750a228697a
+            custom_camera: camera.a1mini_0309da472900598_camera
+            custom_light: light.a1mini_0309da472900598_kamerlicht
+            custom_temperature: sensor.a1mini_0309da472900598_bedtemperatuur
+            custom_humidity: sensor.achtertuin_temperatuur_en_luchtdruk_sensor_luchtvochtigheid
+            style: simple
+          - chart_type: line
+            period: 5minute
+            type: statistics-graph
+            entities:
+              - sensor.a1mini_0309da472900598_nozzle_temperatuur
+            stat_types:
+              - mean
+              - min
+              - max
+            days_to_show: 0.01
+            hide_legend: true
+            grid_options:
+              columns: 12
+              rows: 3
+      - type: grid
+        cards:
+          - type: heading
+            heading: 3D printer / luchtkwaliteit
+            heading_style: title
+            icon: mdi:printer-3d-nozzle
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.a1_mini_print_weight
+              - sensor.a1mini_0309da472900598_gewicht_van_print
+            stat_types:
+              - max
+            grid_options:
+              columns: 48
+              rows: 3
+            hide_legend: true
+            days_to_show: 170
+          - chart_type: line
+            period: day
+            type: statistics-graph
+            entities:
+              - sensor.sensibo_air_quality_tvoc
+            stat_types:
+              - max
+            grid_options:
+              columns: 48
+              rows: 3
+            hide_legend: true
+            days_to_show: 170
+          - chart_type: bar
+            period: week
+            type: statistics-graph
+            entities:
+              - sensor.a1_mini_nozzle_target_temperature
+              - sensor.a1mini_0309da472900598_nozzle_temperatuur
+            stat_types:
+              - max
+            logarithmic_scale: false
+            hide_legend: true
+            grid_options:
+              columns: 48
+              rows: 3
+            days_to_show: 170
+        column_span: 4
+    header:
+      card:
+        type: markdown
+        text_only: true
+        content: '# Black Betty Bambulab'
+    badges:
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.a1mini_0309da472900598_printfout
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: sensor.a1mini_0309da472900598_resterende_tijd
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: sensor.a1mini_0309da472900598_gewicht_van_print
