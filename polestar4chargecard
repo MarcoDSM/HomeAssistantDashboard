@@ -1,7 +1,7 @@
 type: custom:bubble-card
 button_type: slider
 card_type: button
-entity: sensor.polestar_2280_battery_charge_level
+entity: sensor.polestar_battery_charge_level
 name: Polestar 4 Battery
 show_state: true
 scrolling_effect: true
@@ -12,7 +12,7 @@ card_mod:
       position: relative;
     }
     ha-card::before {
-      content: "{{ states('sensor.polestar_2280_estimated_range') }} km";
+      content: "{{ states('sensor.polestar_estimated_range') }} km";
       position: absolute;
       top: 3%;
       left: 3%;
@@ -23,7 +23,7 @@ card_mod:
       pointer-events: none;
     }
     ha-card::after {
-      content: "{{ states('sensor.polestar_2280_battery_charge_level') }}%";
+      content: "{{ states('sensor.polestar_battery_charge_level') }}%";
       position: absolute;
       top: 15px;
       left: 3%;
