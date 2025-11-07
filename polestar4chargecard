@@ -61,7 +61,7 @@ styles: |-
     left: -10%;
     width: 135%; 
     height: 135%;
-    background-image: url("/local/polestartop5.png");
+    background-image: url("/local/polestartop.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
