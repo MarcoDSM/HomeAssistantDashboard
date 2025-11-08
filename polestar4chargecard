@@ -1,71 +1,37 @@
-type: custom:bubble-card
-button_type: slider
-card_type: button
-entity: sensor.polestar_battery_charge_level
-name: Polestar 4 Battery
-show_state: true
-scrolling_effect: true
-show_name: true
+type: picture
+image:
+  media_content_id: /local/polestartop.png
 card_mod:
   style: |
     ha-card {
+      --percent: {{ states('sensor.polestar_battery_charge_level') + '%' }};
       position: relative;
+      background: linear-gradient(
+        to right,    
+        #fe7c0c var(--percent),    
+        rgba(0,0,0,0.1) var(--percent) 
+      );
+      padding: 0.5em 0.5em 0em 2.8em;
     }
     ha-card::before {
-      content: "{{ states('sensor.polestar_estimated_range') }} km";
+      content: "{{ states('sensor.polestar_estimated_range') }} km - {{ states('sensor.polestar_charging_status') }}";
       position: absolute;
-      top: 3%;
+      top: 0.2em;
       left: 3%;
       color: white;
       font-size: 1.5rem;
       font-weight: 10;
       z-index: 999;
       pointer-events: none;
+      white-space: pre-line;
     }
     ha-card::after {
-      content: "{{ states('sensor.polestar_battery_charge_level') }}%";
+      content: "{{ states('sensor.polestar_battery_charge_level') + '%' }}";
       position: absolute;
-      top: 15px;
-      left: 3%;
+      top: 0.4em;
+      left: 2.5%;
       color: white;
-      font-size: 6rem;
-      font-weight: ;
+      font-size: 3.5rem;
       z-index: 999;
       pointer-events: none;
     }
-styles: |-
-  .bubble-icon-container {
-    border-radius: 100px;
-  }
-  .bubble-button-card-container {
-    border: 0px solid var(--outline-color);
-    border-radius: 0px !important;
-  }
-  .bubble-button-card {
-    border-radius: 0px !important;
-  }
-  .bubble-range-slider {
-    border-radius: 0px !important;
-    position: relative;
-    overflow: visible;
-    cursor: pointer;
-  }
-  .bubble-range-fill {
-    background: #fe7c0c !important;
-    opacity: 1 !important;
-  }
-  .bubble-range-slider::after {
-    content: "";
-    position: absolute;
-    top: -15%;
-    left: -10%;
-    width: 135%; 
-    height: 135%;
-    background-image: url("/local/polestartop.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    pointer-events: none;
-    opacity: 1;
-    z-index: 2;
-  }
