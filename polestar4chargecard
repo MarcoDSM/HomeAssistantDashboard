@@ -1,6 +1,6 @@
 type: picture
 image:
-  media_content_id: /local/polestartop.png
+  media_content_id: /local/polestartop5.png
 card_mod:
   style: |
     ha-card {
@@ -8,10 +8,14 @@ card_mod:
       position: relative;
       background: linear-gradient(
         to right,    
-        #fe7c0c var(--percent),    
-        rgba(0,0,0,0.1) var(--percent) 
+        #fe7c0c var(--percent),    # orange color
+        rgba(0,0,0,0.05) var(--percent) # change the 0.05 value to make the background (non-charged portion) less/more transparent
       );
       padding: 0.5em 0.5em 0em 2.8em;
+    }
+    img {
+      transform: scale(1.10); # Zoom in on your car picture here
+      transform-origin: bottom;
     }
     ha-card::before {
       content: "{{ states('sensor.polestar_estimated_range') }} km - {{ states('sensor.polestar_charging_status') }}";
